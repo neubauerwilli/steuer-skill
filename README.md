@@ -1,13 +1,15 @@
 # Der Steuer-Skill
 
 Elf Claude-Skills auf Deutsch, die mit dir deine Steuererklärung machen. Für Arbeitnehmer in
-Deutschland und Österreich. Kostenlos, MIT, keine Anmeldung, kein API-Schlüssel, nichts zu
-verbinden. Deine Daten bleiben in einem Ordner auf deinem Rechner.
+Deutschland und Österreich. Das Paket ist kostenlos und MIT-lizenziert. Der Skill braucht
+keine eigene Anmeldung und keinen zusätzlichen API-Schlüssel. Claude-Zugang und
+Nutzungskontingente sind separat. Lokale Ergebnisdateien liegen im Projektordner;
+Inhalte, die du Claude zeigst, werden über deinen Claude-Zugang verarbeitet.
 
-Einer sortiert deine Belege. Ein anderer findet in deinem Kontoauszug alles, was du absetzen
-kannst. Ein weiterer führt dich Schritt für Schritt durch ELSTER oder FinanzOnline. Und der
-Rückblick geht deine letzten Jahre durch und holt Geld zurück, das du bisher liegen gelassen
-hast. Kommt der Bescheid, prüft Claude, ob alles stimmt.
+Einer sortiert deine Belege. Ein anderer markiert im Kontoauszug mögliche Abzugsposten.
+Ein weiterer hilft dir, Angaben für ELSTER oder FinanzOnline vorzubereiten. Der Rückblick
+prüft offene Jahre und Fristen. Eine Erstattung wird nicht garantiert. Kommt der Bescheid,
+vergleicht Claude ihn mit deiner Erklärung und nennt konkrete Abweichungen.
 
 **Abgeschickt wird nichts, bevor du Ja sagst.** Kein Skill loggt sich ein oder reicht etwas ein.
 Das machst du selbst.
@@ -18,7 +20,7 @@ Das machst du selbst.
 
 ## Einrichten
 
-Füge den Link zu diesem Repo in Claude ein und sag `install skill`:
+Du kannst Claude den Link und die Anweisung `install skill` geben:
 
 ```
 https://github.com/neubauerwilli/steuer-skill
@@ -26,7 +28,8 @@ https://github.com/neubauerwilli/steuer-skill
 install skill
 ```
 
-Oder als Plugin in Claude Code:
+Das ist eine Chat-Anweisung, keine universelle Installationsfunktion. Ob Claude Dateien
+installieren kann, hängt vom verwendeten Modus ab. Der konkrete Weg in Claude Code ist:
 
 ```
 /plugin marketplace add neubauerwilli/steuer-skill
@@ -48,8 +51,12 @@ git clone https://github.com/neubauerwilli/steuer-skill.git
 Copy-Item -Recurse steuer-skill\skills\steuer-* "$env:USERPROFILE\.claude\skills\"
 ```
 
-Kein Claude Code? Füge eine einzelne `SKILL.md` oben in einen Chat ein, dann läuft sie als
-Modus. Die Python-Werkzeuge fallen dann weg, die Methode funktioniert trotzdem.
+Kein Claude Code? Lade einzelne Skill-Ordner als ZIP unter **Anpassen / Customize > Skills**
+hoch und aktiviere sie. Code-Ausführung und Dateierstellung müssen eingeschaltet sein.
+Der normale Chat schreibt nicht automatisch in deinen lokalen Ordner. Alternativ kannst du
+eine einzelne `SKILL.md` als Arbeitsanweisung in einen Chat einfügen; das ist keine Installation
+und führt die Python-Werkzeuge nicht automatisch aus.
+[Aktuelle offizielle Skill-Anleitung](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
 Die Werkzeuge brauchen Python 3.8 oder neuer, nichts per pip installieren. Unter Windows heißt
 der Aufruf oft `py` statt `python3`.

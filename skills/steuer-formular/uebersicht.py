@@ -8,6 +8,8 @@ und schreibt uebersicht.md mit Summen je Kategorie. Nur Standardbibliothek.
 """
 import argparse
 import csv
+import datetime as dt
+import math
 import os
 import re
 import sys
@@ -19,9 +21,34 @@ def zahl(t):
     if re.search(r",\d{1,2}$", t):
         t = t.replace(".", "").replace(",", ".")
     try:
-        return float(t)
+        n = float(t)
+        return n if math.isfinite(n) else None
     except ValueError:
         return None
+
+
+def norm_datum(text):
+    text = (text or "").strip()
+    for fmt in ("%Y-%m-%d", "%d.%m.%Y", "%d.%m.%y"):
+        try:
+            return dt.datetime.strptime(text, fmt).date().isoformat()
+        except ValueError:
+            pass
+    return text
+
+
+def norm_text(text):
+    return " ".join((text or "").casefold().split())
+
+
+def beleg_schluessel(z, kandidat=False):
+    # Datum und Betrag allein identifizieren keinen Umsatz.
+    empfaenger = z.get("empfaenger") if kandidat else z.get("aussteller")
+    zweck = z.get("verwendungszweck") if kandidat else z.get("zweck")
+    if not norm_text(empfaenger) or not norm_text(zweck):
+        return None
+    return (norm_datum(z.get("datum")), zahl(z.get("betrag")),
+            norm_text(empfaenger), norm_text(zweck))
 
 
 def euro(x):
@@ -47,7 +74,11 @@ def main():
     a = ap.parse_args()
 
     posten, offen = [], []
-    for z in lies(os.path.join(a.ordner, "belege.csv")):
+    belege = lies(os.path.join(a.ordner, "belege.csv"))
+    kandidaten = lies(os.path.join(a.ordner, "kandidaten.csv"))
+    if not belege and not kandidaten:
+        offen.append("Keine Belege oder Kontoauszugsposten vorhanden. Zuerst Material einlesen; 0 Euro ist kein fertiges Steuerergebnis.")
+    for z in belege:
         if (z.get("kategorie") or "").strip().lower() == "privat":
             continue
         b = zahl(z.get("betrag"))
@@ -58,17 +89,31 @@ def main():
         if not (z.get("datei") or "").strip():
             offen.append("Ohne Belegdatei: %s %s %s" % (z.get("datum", ""), z.get("aussteller", ""), euro(b)))
 
-    belegt = {(z.get("datum"), zahl(z.get("betrag"))) for z in lies(os.path.join(a.ordner, "belege.csv"))}
-    for z in lies(os.path.join(a.ordner, "kandidaten.csv")):
+    belegt = {beleg_schluessel(z) for z in belege}
+    belegt.discard(None)
+    for z in kandidaten:
         e = (z.get("entscheidung") or "").strip().lower()
         b = zahl(z.get("betrag"))
-        if b is None or not (e == "ja" or e.startswith("anteilig")):
+        if e == "nein":
             continue
-        if (z.get("datum"), b) in belegt:
+        if b is None:
+            offen.append("Kontoauszug ohne lesbaren Betrag: %s %s" % (z.get("datum", ""), z.get("empfaenger", "")))
             continue
+        if not (e == "ja" or e.startswith("anteilig")):
+            offen.append("Kontoauszug noch nicht entschieden: %s %s" % (z.get("datum", ""), z.get("empfaenger", "")))
+            continue
+        anteil = 100.0
         if e.startswith("anteilig"):
-            m = re.search(r"(\d+(?:[.,]\d+)?)", e)
-            b = b * float(m.group(1).replace(",", ".")) / 100 if m else b
+            m = re.fullmatch(r"anteilig\s+(\d+(?:[.,]\d+)?)\s*%?", e)
+            if not m or not 0 <= float(m.group(1).replace(",", ".")) <= 100:
+                offen.append("Beruflicher Anteil fehlt oder liegt nicht zwischen 0 und 100 Prozent: %s %s (%s)" % (z.get("datum", ""), z.get("empfaenger", ""), e))
+                continue
+            anteil = float(m.group(1).replace(",", "."))
+        if beleg_schluessel(z, kandidat=True) in belegt:
+            if anteil != 100:
+                offen.append("Anteil aus Kontoauszug bei vorhandenem Beleg im Fach-Skill anwenden: %s %s (%s Prozent); die Belegsumme bleibt hier eine Rohsumme." % (z.get("datum", ""), z.get("empfaenger", ""), anteil))
+            continue
+        b = b * anteil / 100
         posten.append((z.get("kategorie") or "Sonstiges", z.get("skill") or "", b, "Kontoauszug"))
 
     summen = OrderedDict()

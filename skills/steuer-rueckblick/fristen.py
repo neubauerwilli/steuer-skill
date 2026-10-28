@@ -23,6 +23,11 @@ def offene_jahre(land, heute):
     # Ein Jahr ist erst nach seinem Ende erklärbar; das laufende Jahr zählt nicht
     for jahr in range(heute.year - n - 1, heute.year):
         ende = dt.date(jahr + n, 12, 31)
+        # Diese Jahresfrist endet regulär am 31.12. Bei Wochenende
+        # folgen Neujahr (Feiertag in DE/AT) und der nächste Werktag.
+        # Keine allgemeine Fristberechnung für andere Termine.
+        while ende.weekday() >= 5 or (ende.month == 1 and ende.day == 1):
+            ende += dt.timedelta(days=1)
         if ende >= heute:
             jahre.append({"jahr": jahr, "frist_ende": ende.isoformat(), "tage_uebrig": (ende - heute).days})
     return sorted(jahre, key=lambda j: j["frist_ende"])

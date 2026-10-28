@@ -9,6 +9,7 @@ schreibt Treffer aus regeln.json nach kandidaten.csv. Nur Standardbibliothek.
 import argparse
 import csv
 import json
+import math
 import os
 import re
 import sys
@@ -49,7 +50,8 @@ def zahl(text):
     else:
         t = t.replace(",", "")
     try:
-        return float(t)
+        n = float(t)
+        return n if math.isfinite(n) else None
     except ValueError:
         return None
 

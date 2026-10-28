@@ -43,11 +43,16 @@ offen und empfiehl Lohnsteuerhilfeverein oder Steuerberatung, ohne Panik zu mach
 ## Schritt 2: welche Jahre noch gehen
 
 Lass `fristen.py` laufen. Es rechnet:
+Wenn du das Werkzeug nicht ausführen kannst, nenne keine selbst berechneten Fristenden
+als bestätigt. Prüfe jedes konkrete Datum einschließlich Wochenende und Feiertagen an
+einer aktuellen amtlichen Quelle und kennzeichne noch ungeprüfte Daten ausdrücklich.
 - **Deutschland:** freiwillige Erklärung (Antragsveranlagung) bis zum Ende des vierten
   Jahres nach dem Steuerjahr. Für 2022 also bis 31.12.2026.
 - **Österreich:** Arbeitnehmerveranlagung bis zum Ende des fünften Jahres nach dem
   Steuerjahr. Für 2021 also bis 31.12.2026.
 Es zeigt die offenen Jahre, das Fristende und die verbleibenden Tage, das dringendste zuerst.
+Fällt der 31. Dezember auf ein Wochenende, berücksichtigt das Werkzeug den nächsten
+Werktag nach Neujahr (DE: § 108 AO, AT: § 108 BAO). Andere Fristarten sind nicht abgedeckt.
 
 ## Schritt 3: welche Jahre sich lohnen
 

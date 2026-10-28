@@ -46,6 +46,16 @@ def main():
     with open(a.termine, encoding="utf-8") as f:
         termine = json.load(f)
 
+    if not isinstance(termine, list):
+        sys.exit("Termine müssen als JSON-Liste vorliegen.")
+    for t in termine:
+        if not isinstance(t, dict) or not isinstance(t.get("titel"), str) or not t["titel"].strip():
+            sys.exit("Termin ohne gültigen Titel: %s" % t)
+        try:
+            dt.date.fromisoformat(t["datum"])
+        except (KeyError, ValueError, TypeError):
+            sys.exit("Fehlendes oder ungültiges Datum in: %s" % t)
+
     jetzt = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     z = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//steuer-skill//DE", "CALSCALE:GREGORIAN"]
     for t in sorted(termine, key=lambda x: x["datum"]):

@@ -2,7 +2,7 @@
 name: steuer-homeoffice
 description: >-
   Homeoffice für die Steuererklärung. Zählt die Tage zu Hause, wendet die
-  Homeoffice-Pauschale an (Deutschland Tagespauschale, Österreich Homeoffice-Pauschale
+  Homeoffice-Pauschale an (Deutschland Tagespauschale, Österreich seit 2025 Telearbeitspauschale
   und Ausstattung), prüft, ob ein echtes Arbeitszimmer mehr bringt, und sammelt
   Schreibtisch, Stuhl, Monitor und Co. Nutze ihn, wenn der Nutzer sagt "Homeoffice
   absetzen", "Homeoffice-Pauschale", "Arbeitszimmer", "ich arbeite von zu Hause",
@@ -40,7 +40,8 @@ Arbeit kein anderer Arbeitsplatz zur Verfügung stand; im Zweifel nicht doppelt 
 
 ## Schritt 3: Österreich
 
-- Homeoffice-Pauschale: bis zu 3 € je Homeofficetag für höchstens 100 Tage. Zahlt der
+- Seit 2025 Telearbeitspauschale (vorher Homeoffice-Pauschale): bis zu 3 € je qualifiziertem
+  Telearbeitstag für höchstens 100 Tage. Zahlt der
   Arbeitgeber weniger, darf die Differenz als Werbungskosten angesetzt werden. Die Tage
   stehen am Lohnzettel L16. Grenzen jährlich auf bmf.gv.at prüfen.
 - Ergonomische Einrichtung (Schreibtisch, Stuhl, Beleuchtung) war mit eigener Obergrenze
