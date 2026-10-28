@@ -1,0 +1,5 @@
+[
+  {"titel": "Steuer 2022 nachholen, letzter Tag", "datum": "2026-12-31", "erinnern_tage": [28, 7]},
+  {"titel": "Steuer 2023 nachholen, letzter Tag", "datum": "2027-12-31", "erinnern_tage": [28, 7]},
+  {"titel": "Einspruchsfrist Bescheid 2025", "datum": "2026-08-14", "erinnern_tage": [7, 2], "notiz": "Bescheid vom 10.07.2026, Bekanntgabe 14.07.2026. Erfundenes Beispiel."}
+]

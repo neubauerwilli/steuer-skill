@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "steuer-skill",
+  "description": "Der Steuer-Skill für Claude, auf Deutsch",
+  "owner": {
+    "name": "Willi Neubauer",
+    "url": "https://willineubauer.com"
+  },
+  "plugins": [
+    {
+      "name": "steuer-skill",
+      "description": "Elf Claude-Skills für deine Steuererklärung (DE und AT): Belege, Kontoauszug, Pendeln, Homeoffice, Werbungskosten, Haushalt, Familie, Rückblick, Formular, Bescheid und Fristen.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/neubauerwilli/steuer-skill"
+    }
+  ]
+}

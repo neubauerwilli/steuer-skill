@@ -1,0 +1,21 @@
+Kontoauszug Girokonto (erfundene Beispieldaten)
+Zeitraum;01.01.2025 bis 31.12.2025
+
+Buchungstag;Valuta;Name Zahlungsbeteiligter;Verwendungszweck;Betrag (EUR)
+02.01.2025;02.01.2025;Musterfirma GmbH;Gehalt Januar;3.120,00
+05.01.2025;05.01.2025;REWE Markt;Einkauf;-64,31
+14.01.2025;14.01.2025;MediaMarkt Online;Laptop ThinkPad Bestellnr 4711;-899,00
+20.01.2025;20.01.2025;Deutsche Bahn;Deutschlandticket Januar;-58,00
+01.02.2025;01.02.2025;Telekom Deutschland;Mobilfunk Rechnung 02;-39,95
+03.02.2025;03.02.2025;Netflix;Abo;-13,99
+11.02.2025;11.02.2025;Udemy;Kurs Excel fuer Controller;-19,99
+15.03.2025;15.03.2025;Elektro Huber;Rechnung 2025-118 Reparatur Steckdosen;-286,00
+02.04.2025;02.04.2025;ver.di;Mitgliedsbeitrag Q2;-48,00
+10.04.2025;10.04.2025;Kita Sonnenschein;Betreuung April;-220,00
+22.05.2025;22.05.2025;Fielmann;Brille;-189,00
+30.06.2025;30.06.2025;Hausverwaltung Meier;Nebenkostenabrechnung 2024;-312,40
+12.07.2025;12.07.2025;Amazon;Bestellung;-27,50
+01.09.2025;01.09.2025;IKEA Deutschland;Schreibtisch Buerostuhl;-249,00
+15.11.2025;15.11.2025;O2;Hardware Ratenzahlung;-25,00
+20.12.2025;20.12.2025;UNICEF Deutschland;Spende Weihnachten;-50,00
+24.12.2025;24.12.2025;Dreiling Bau;Fliesenarbeiten Bad Rechnung 77;-640,00
